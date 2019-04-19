@@ -19,6 +19,17 @@ public class SlidingPuzzle {
 			}
 		}
 	}
+	public SlidingPuzzle(SlidingPuzzle parent) {		//konstruktor kopiujacy 
+		board =new byte[n][n];
+		point=new Point(0,0);
+		for(int i=0; i<n; i++) {
+			for(int j=0;j<n;j++) {
+				board[i][j]=parent.board[i][j];
+			}
+		}
+		point=parent.point;
+	}
+		
 	public String toString() {		//wyswietlenie puzzli
 		String txt="";
 		for(int i=0;i<n;i++) {
