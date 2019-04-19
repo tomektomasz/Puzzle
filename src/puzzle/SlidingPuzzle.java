@@ -4,11 +4,11 @@ import java.awt.Point;
 import java.util.Random;
 import java.lang.Math;
 
-public class SlidingPuzzle {
+public class SlidingPuzzle {		
 	public static int n=3 ;
 	public byte[][] board ;
 	Point point;
-	public SlidingPuzzle() {
+	public SlidingPuzzle() {		//konstruktor
 		board =new byte[n][n];
 		point=new Point(0,0);
 		byte k=0;		
@@ -19,7 +19,7 @@ public class SlidingPuzzle {
 			}
 		}
 	}
-	public String toString() {
+	public String toString() {		//wyswietlenie puzzli
 		String txt="";
 		for(int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -29,7 +29,7 @@ public class SlidingPuzzle {
 		}
 		return txt;
 	}
-	public Point showPlace(int nr) {
+	public Point showPlace(int nr) {		//znalezienie miejsca dla kafelaka nr...
 		int x=0;
 		int y=0;
 		for(int i=0;i<n;i++) {
@@ -42,7 +42,7 @@ public class SlidingPuzzle {
 		}
 		return new Point(x,y);
 	}
-	public void makeMove(char goal) {
+	public void makeMove(char goal) {		//przesuniecie kafelka
 		switch(goal) {
 		case 'L':
 			if((point.y)==0) return;
@@ -70,7 +70,7 @@ public class SlidingPuzzle {
 			break;
 		}	
 	}
-	public void mixPuzzle(int many) {
+	public void mixPuzzle(int many) {		//pomieszanie kafelkow
 		Random fate;
 		int a;
 		fate =new Random();
@@ -83,7 +83,7 @@ public class SlidingPuzzle {
 		}
 		
 	}
-	public int hMissTiles() {
+	public int hMissTiles() {		//funkcja heurystyczna misstilles
 		int k=0;
 		int sum=0;
 		for(int i=0; i<n; i++) {
@@ -96,7 +96,7 @@ public class SlidingPuzzle {
 		}
 		return sum;
 	}
-	public int hManhatan() {
+	public int hManhatan() {		//funkcja heurystyczna manhatan
 		int k=0;
 		int sum=0;
 		for(int i=0; i<n; i++) {
