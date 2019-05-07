@@ -40,7 +40,7 @@ public class SlidingPuzzle {
 
     }
 
-    public String getMoves(){
+    public String get_moves(){
         return this.moves;
     }
 
@@ -54,17 +54,17 @@ public class SlidingPuzzle {
         }
         return txt;
     }
+
     public boolean equals(Object obj) {
-        if (this == obj) return true;
+        if (this == obj) return true; 
         if (obj == null) return false;
         if (!(obj instanceof SlidingPuzzle)) return false; 
         else{
             boolean the_same = true;
             SlidingPuzzle other = (SlidingPuzzle) obj;
-            for(int i = 0; i < this.n; i++){
+            for(int i = 0; i < this.n*this.n; i++){
                 Point p1 = this.showPlace(i);
                 Point p2 = other.showPlace(i);
-             
                 if(p1.x != p2.x || p1.y != p2.y){
                     the_same = false;
                     break;
@@ -75,7 +75,7 @@ public class SlidingPuzzle {
         }
     }
 
-    public Point showPlace(int nr) {		//pokazanie obecnego miejsca dla nr-u
+    public Point showPlace(int nr) {
         int x=0;
         int y=0;
         for(int i=0;i<n;i++) {
@@ -95,24 +95,28 @@ public class SlidingPuzzle {
                 board[point.x][point.y]=board[point.x][point.y-1];
                 board[point.x][point.y-1]=0;
                 point.y=point.y-1;
+                this.moves += goal;
                 return true;
             case 'R':
                 if((point.y+1)==n) return false;
                 board[point.x][point.y]=board[point.x][point.y+1];
                 board[point.x][point.y+1]=0;
                 point.y=point.y+1;
+                this.moves += goal;
                 return true;
             case 'U':
                 if((point.x)==0) return false;
                 board[point.x][point.y]=board[point.x-1][point.y];
                 board[point.x-1][point.y]=0;
                 point.x=point.x-1;
+                this.moves += goal;
                 return true;
             case 'D':
                 if((point.x+1)==n) return false;
                 board[point.x][point.y]=board[point.x+1][point.y];
                 board[point.x+1][point.y]=0;
                 point.x=point.x+1;
+                this.moves += goal;
                 return true;
         }
 
@@ -120,14 +124,12 @@ public class SlidingPuzzle {
     }
     public void mixPuzzle(int many) {		//pomieszanie kafelkow
         Random fate;
-        this.moves="";
         int a;
         fate = new Random();
         while(many > 0){
             a = fate.nextInt(4);
             char dir = "LRUD".charAt(a);
             if(makeMove(dir)){
-            	this.moves += dir;
                 many--;
             }
         }
@@ -332,19 +334,13 @@ public class SlidingPuzzle {
     
     public static void main(String[] args) {
         SlidingPuzzle sp= new SlidingPuzzle();
-
-        System.out.println(sp.toString());
-       
-
-        System.out.println("MIESZANIE I ROZWIĄZYWANIE\n");
-      
+        System.out.println("MIESZANIE \n");     
         sp.solve();
-
-        sp.mixPuzzle(100);
-        System.out.println("Zrobione losowe ruchy:\n" + sp.getMoves() );
-        System.out.println("Otrzymana plansza:");
-        System.out.println(sp.toString());       
-
+        sp.mixPuzzle(50);
+        System.out.println("Zrobione losowe ruchy:\n" + sp.get_moves() );
+        System.out.println("Plansza:");
+        System.out.println(sp.toString());
+        System.out.println("ROZWIAZANIE \n");
         List<String> solution;
         
         SlidingPuzzle sp_misplaced = new SlidingPuzzle(sp);
@@ -365,7 +361,6 @@ public class SlidingPuzzle {
         System.out.println("Ilość stanow: " + solution.get(1));
 
         System.out.println(sp_manhattan.toString());
-
     }
 
 }
